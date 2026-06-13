@@ -42,6 +42,7 @@ EverNote is a simple yet polished note-taking app that demonstrates a complete a
 - MongoDB with Mongoose
 - JWT Authentication
 - dotenv
+- CORS
 
 ## 📁 Project Structure
 
@@ -88,6 +89,13 @@ Create a `.env` file in the project root with:
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/mern-notes-app
 JWT_SECRET=your_secret_key_here
+FRONTEND_URL=http://localhost:5173
+```
+
+For production deployment, set the same values in your hosting provider environment variables and also set the frontend variable:
+
+```env
+VITE_API_URL=https://your-backend-url
 ```
 
 ### 4. Run the app
@@ -110,8 +118,15 @@ npm run dev
 
 This project can be deployed using:
 - Vercel for the frontend
-- Render for the backend
+- Render or Railway for the backend
 - MongoDB Atlas for the database
+
+### Frontend deployment
+- Set `VITE_API_URL` to your deployed backend URL.
+
+### Backend deployment
+- Set `MONGO_URI`, `JWT_SECRET`, and `FRONTEND_URL` in your environment variables.
+- Make sure your backend CORS settings allow your frontend domain.
 
 ## 🤝 Contributing
 

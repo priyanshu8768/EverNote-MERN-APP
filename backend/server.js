@@ -6,6 +6,11 @@ import notesRoutes from "./routes/notes.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import cors from "cors";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
@@ -14,9 +19,16 @@ const app = express();
 
 app.use(express.json());
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://your-frontend-url.vercel.app"],
+    origin: allowedOrigins,
     credentials: true,
   })
 );
@@ -24,8 +36,6 @@ app.use(
 app.use("/api/users", authRoutes);
 app.use("/api/notes", notesRoutes);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const frontendDistPath = path.resolve(__dirname, "..", "frontend", "dist");
 
 if (process.env.NODE_ENV === "production") {
