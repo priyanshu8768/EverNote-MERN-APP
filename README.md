@@ -53,6 +53,7 @@ mern-notes-app-main/
 │   ├── models/
 │   ├── routes/
 │   └── server.js
+├── package.json   
 ├── frontend/
 │   ├── src/
 │   ├── public/
